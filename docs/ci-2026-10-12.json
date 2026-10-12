@@ -1,0 +1,125 @@
+{
+  "run_id": 38271764003,
+  "url": "https://github.com/NGK-999/InterfaceNeural/actions/runs/38271764003",
+  "head_sha": "412879a7b63c05d4826903007db4ab85aa681509",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "software (ubuntu-24.04)",
+      "id": 114887474731,
+      "conclusion": "success"
+    },
+    {
+      "name": "software (windows-latest)",
+      "id": 114887475103,
+      "conclusion": "success"
+    },
+    {
+      "name": "Atualizar download no README",
+      "id": 114889419860,
+      "conclusion": "success"
+    }
+  ],
+  "tests_per_platform": {
+    "python": 62,
+    "node": 24
+  },
+  "soak": {
+    "linux": {
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "python": "3.12.15 (main, Oct  1 2026, 02:35:59) [GCC 13.3.0]",
+      "qt_platform": "offscreen",
+      "versions": {
+        "PySide6-Essentials": "6.12.0",
+        "pyqtgraph": "0.14.0",
+        "numpy": "2.5.4",
+        "pyserial": "3.5"
+      },
+      "elapsed_seconds": 60.05805915699999,
+      "requested_samples_per_second": 2000,
+      "generated": 120040,
+      "received": 120040,
+      "consumed": 120040,
+      "queue_dropped": 0,
+      "missing_samples": 0,
+      "errors": 0,
+      "buffer_max_samples": 20001,
+      "buffer_capacity_dropped": 0,
+      "max_drained_batches": 2,
+      "ui_ticks": 1876,
+      "ui_max_interval_ms": 51.0423129999964,
+      "ui_p99_interval_ms": 34.930881000008185,
+      "rss_min_after_warmup_mib": 119.67578125,
+      "rss_max_after_warmup_mib": 120.30859375,
+      "checks": {
+        "duration_at_least_requested": true,
+        "sample_accounting": true,
+        "bounded_buffer": true,
+        "ten_second_window": true,
+        "no_losses": true,
+        "no_errors": true,
+        "pause_acquires_without_replay": true,
+        "ui_max_interval_under_one_second": true,
+        "rss_growth_under_32_mib_after_warmup": true,
+        "worker_stopped": true
+      },
+      "passed": true
+    },
+    "windows": {
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+      "qt_platform": "offscreen",
+      "versions": {
+        "PySide6-Essentials": "6.12.0",
+        "pyqtgraph": "0.14.0",
+        "numpy": "2.5.4",
+        "pyserial": "3.5"
+      },
+      "elapsed_seconds": 60.07800000000003,
+      "requested_samples_per_second": 2000,
+      "generated": 120040,
+      "received": 120040,
+      "consumed": 120040,
+      "queue_dropped": 0,
+      "missing_samples": 0,
+      "errors": 0,
+      "buffer_max_samples": 20001,
+      "buffer_capacity_dropped": 0,
+      "max_drained_batches": 5,
+      "ui_ticks": 1274,
+      "ui_max_interval_ms": 62.99999999998818,
+      "ui_p99_interval_ms": 62.99999999998818,
+      "rss_min_after_warmup_mib": 97.4375,
+      "rss_max_after_warmup_mib": 99.3046875,
+      "checks": {
+        "duration_at_least_requested": true,
+        "sample_accounting": true,
+        "bounded_buffer": true,
+        "ten_second_window": true,
+        "no_losses": true,
+        "no_errors": true,
+        "pause_acquires_without_replay": true,
+        "ui_max_interval_under_one_second": true,
+        "rss_growth_under_32_mib_after_warmup": true,
+        "worker_stopped": true
+      },
+      "passed": true
+    }
+  },
+  "installer": {
+    "artifact_id": 11757880905,
+    "download_url": "https://github.com/NGK-999/InterfaceNeural/actions/runs/38271764003/artifacts/11757880905",
+    "archive_sha256": "67a2c396eaa30d452820904add2b2f70060e1f1a1e3af6559f5e0740fb337d38",
+    "filename": "MonitorMuscular-Instalar.exe",
+    "bytes": 40339607,
+    "sha256": "e27e4f9ca6269ae3bd720fd554e27cae36748c0bbccf6984b21074d6f1b639fc",
+    "installed_payload_shortcuts_smoke_uninstall_verified": true
+  },
+  "limits": {
+    "windows_gui_native_inspected": false,
+    "ci_linux_x11_bundle_verified": false,
+    "physical_serial_tested": false,
+    "firmware_tested": false,
+    "body_safety_evaluated": false
+  }
+}

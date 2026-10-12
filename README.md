@@ -24,8 +24,8 @@ Extraia o ZIP e abra `MonitorMuscular-Instalar.exe`.
 
 <!-- windows-installer-download:end -->
 
-Após a CI aprovar o instalador, o link acima será preenchido automaticamente e
-iniciará o download do ZIP **MonitorMuscular-Instalador-Windows-x86_64**. Extraia
+O link acima inicia o download do ZIP **MonitorMuscular-Instalador-Windows-x86_64**,
+aprovado pela CI. Extraia
 o ZIP para encontrar `MonitorMuscular-Instalar.exe`. O download exige login e
 acesso ao repositório privado. O link vale enquanto o artefato estiver disponível;
 uma nova compilação aprovada atualiza o endereço.
@@ -46,13 +46,13 @@ administrador. Alvos: Windows 10 1809+ e Windows 11, ambos x64.
 entregue somente `MonitorMuscular-Instalar.exe` ao amigo. O repositório
 pode continuar privado; o amigo não precisa acessá-lo se receber esse arquivo.
 
-A CI compila, instala, confere arquivos/atalho, roda a simulação e desinstala antes
-de disponibilizar o instalador. Essa receita ainda depende de execução Windows;
-nenhum instalador Windows foi gerado neste ambiente Linux. O instalador produzido
+A CI compilou, instalou, conferiu arquivos/atalhos, executou a simulação e
+desinstalou o aplicativo com sucesso no Windows Server 2025. A inspeção visual
+no Windows 10/11 do usuário ainda está pendente. O instalador produzido
 não tem assinatura digital própria; o primeiro teste deve ser acompanhado se o
 Windows exibir um aviso de segurança. Não é necessário desativar proteções do sistema.
 
-Quando a CI concluir, o pacote portátil completo também será disponibilizado como
+O pacote portátil completo também está disponível na execução aprovada como
 `MuscleMonitor-windows-latest-x86_64`.
 Ele exige extrair a pasta inteira e conservar `_internal` junto de `MuscleMonitor.exe`.
 
@@ -100,9 +100,9 @@ py -3.12 -m venv .venv
 .\scripts\start.cmd
 ```
 
-O ambiente local de desenvolvimento é Linux. A CI Windows avançou até a etapa
-do instalador, mas a distribuição ainda aguarda aprovação. A instalação e a
-interface nativa Windows continuam pendentes. Veja [evidências](docs/verificacao.md).
+O ambiente local de desenvolvimento é Linux. A CI aprovou o aplicativo e a
+instalação/desinstalação no Windows Server 2025, usando Qt offscreen. A inspeção
+visual no Windows 10/11 continua pendente. Veja [evidências](docs/verificacao.md).
 
 ## Usar
 

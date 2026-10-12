@@ -103,8 +103,8 @@ automaticamente para quilosegundos. Essa regressão também falhou antes da corr
 | Ubuntu 24.04.5 x64 / testes, tipos, lint | Executado e aprovado |
 | Ubuntu / GUI offscreen e ensaio 60 s | Executado e aprovado |
 | Ubuntu / GUI nativa e pacote | Abertura, controles descritos, simulação e fechamento executados |
-| Windows 10/11 x64 / GUI nativa e instalação no PC | **Não executado**; instalador ainda aguarda aprovação |
-| GitHub Actions Ubuntu/Windows | Logs remotos lidos em 12/10/2026; duas falhas identificadas, descritas abaixo |
+| Windows 10/11 x64 / GUI nativa e instalação no PC | **Não executado**; instalador aprovado no runner Windows Server 2025 |
+| GitHub Actions Ubuntu 24.04 / Windows Server 2025 x64 | Testes, ensaio, builds e smokes aprovados; instalação/desinstalação Windows aprovadas |
 | Outro Linux, instalação Linux limpa ou outro computador | Não executado |
 
 ## Pendências de hardware
@@ -150,8 +150,9 @@ marcadores e usa o SHA do README para recusar uma edição concorrente.
 Verificação local: 24 testes Node com API em memória, validação do YAML e teste
 de integração da chamada da CI com o helper e o README. Os 62 testes Python
 também passaram. Não houve chamada de escrita ao GitHub durante esses testes.
-Atualização do README no GitHub e download real pelo navegador continuam
-pendentes da execução remota aprovada; as falhas observadas estão descritas abaixo.
+Atualização do README no GitHub confirmada no run aprovado abaixo. O ZIP foi
+baixado pela API autenticada e extraído localmente; o clique no navegador não
+foi automatizado. As falhas anteriores observadas estão descritas abaixo.
 O número da execução é guardado dentro do bloco: uma execução antiga que terminar
 depois de uma nova preserva o link mais recente.
 
@@ -179,5 +180,41 @@ inspeção gráfica nativa. O sistema exato do runner não aparece no trecho rec
 Verificação local após as correções: importação de QtTest/QtWidgets, 62 testes
 Python, 24 testes Node, Ruff, formatação, mypy e YAML. A versão codificada foi
 confrontada com o recurso/código e a documentação oficial do Inno Setup. Não há
-ISCC/PowerShell no Linux: a nova compilação e instalação continuam pendentes de
-execução na CI Windows. Nenhuma porta física foi aberta.
+ISCC/PowerShell no Linux: a compilação e instalação foram validadas na nova
+execução Windows descrita abaixo. Nenhuma porta física foi aberta.
+
+## CI e instalador aprovados em 12/10/2026
+
+O [run 38271764003](https://github.com/NGK-999/InterfaceNeural/actions/runs/38271764003),
+do commit `412879a7b63c05d4826903007db4ab85aa681509`, terminou com sucesso nos
+dois sistemas e na atualização automática do README. Em cada sistema passaram
+62 testes Python e 24 testes Node, Ruff, formatação, mypy, smoke Python, build e
+smoke do executável. Os registros agregados estão em [ci-2026-10-12.json](ci-2026-10-12.json).
+
+| Ensaio sintético offscreen | Ubuntu 24.04 x64 | Windows Server 2025 x64, build 26100 |
+|---|---|---|
+| Python | 3.12.15 | 3.12.10 |
+| Duração | 60,058 s | 60,078 s |
+| Taxa solicitada | 2.000 amostras/s | 2.000 amostras/s |
+| Geradas / recebidas / consumidas | 120.040 / 120.040 / 120.040 | 120.040 / 120.040 / 120.040 |
+| Perdas / erros | 0 / 0 | 0 / 0 |
+| Buffer máximo | 20.001 amostras | 20.001 amostras |
+| Maior intervalo da UI | 51,04 ms | 63,00 ms |
+| RSS após aquecimento | 119,68–120,31 MiB | 97,44–99,30 MiB |
+| Verificações do ensaio | 10/10 aprovadas | 10/10 aprovadas |
+
+O instalador foi compilado com Inno Setup 6.7.3, instalou 670 arquivos e criou
+atalhos no desktop e menu do usuário, sem administrador. A CI comparou o payload,
+conferiu o destino do atalho, executou a simulação instalada e desinstalou, com
+remoção dos atalhos/registro e sem reiniciar o sistema.
+
+O ZIP baixado passou na conferência do digest do GitHub e de CRC. Foi extraído
+para `dist/installer/MonitorMuscular-Instalar.exe`; o executável tem 40.339.607
+bytes e SHA256 `e27e4f9ca6269ae3bd720fd554e27cae36748c0bbccf6984b21074d6f1b639fc`.
+O commit automático `ed44ec9` alterou somente o bloco do download no README,
+apontando para o artefato real `11757880905` dessa execução.
+
+Limites: os testes Windows usaram Qt offscreen; não houve inspeção visual em
+Windows 10/11 nem teste físico serial/firmware. O build Linux da CI informou
+nove dependências XCB ausentes; sua interface X11 não foi validada. Não se mediu
+percentual de CPU nem se avaliou segurança corporal.

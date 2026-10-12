@@ -57,9 +57,15 @@ encerramento, mas o primeiro teste gráfico nativo Windows ainda cabe ao operado
 O executável próprio ainda não é assinado digitalmente. A assinatura verificada
 do compilador não assina o instalador produzido. Não há desativação de proteções,
 instalação de drivers, abertura de portas físicas ou alteração de firmware.
-O build do aplicativo e seu smoke antecederam a falha do instalador na primeira
-CI Windows observada. Compilação do instalador, instalação e desinstalação ainda
-precisam ser confirmadas pela CI; esta receita não foi executada no Linux.
+O [run aprovado em 12/10/2026](https://github.com/NGK-999/InterfaceNeural/actions/runs/38271764003)
+confirmou compilação, instalação, payload, atalhos, simulação instalada e
+desinstalação no Windows Server 2025 x64. A receita Windows não foi executada
+no Linux. A inspeção visual no Windows 10/11 do usuário continua pendente.
+
+O instalador validado foi baixado para `dist/installer/MonitorMuscular-Instalar.exe`
+no projeto local (40.339.607 bytes). Esse arquivo pode ser entregue ao amigo;
+ele não precisa de Python nem de acesso ao repositório. O SHA256 do executável é
+`e27e4f9ca6269ae3bd720fd554e27cae36748c0bbccf6984b21074d6f1b639fc`.
 
 Referências: [Inno Setup](https://jrsoftware.org/isdl.php),
 [hash do instalador 6.7.3](https://raw.githubusercontent.com/microsoft/winget-pkgs/master/manifests/j/JRSoftware/InnoSetup/6.7.3/JRSoftware.InnoSetup.installer.yaml),
@@ -110,6 +116,11 @@ continuam necessárias. QtGui também depende de `libEGL.so.1`, inclusive com
 pelo loader/plugin; não instale indiscriminadamente pacotes de compilação.
 O pacote gerado em Ubuntu 24.04 não promete rodar em distribuições mais antigas.
 [Requisitos oficiais](https://doc.qt.io/qt-6/linux-requirements.html).
+
+O build Linux da CI aprovada avisou sobre nove bibliotecas XCB ausentes no runner.
+Os testes offscreen não validam o backend X11 desse pacote; as dependências
+nativas devem estar presentes no computador que for executá-lo. A inspeção
+gráfica Linux registrada foi feita com o pacote local, em outro ambiente.
 
 No Windows, drivers USB/serial adequados e permissões continuam necessários.
 O aplicativo não instala drivers e não altera configuração da placa. No Linux,
