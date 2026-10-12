@@ -6,6 +6,12 @@ Inicia desconectado com **Simulador** selecionado. Não guarda sessões ou amost
 
 ## Instalar no Windows: caminho simples
 
+**Download:** [Baixar o instalador e o pacote Windows no GitHub](https://github.com/NGK-999/InterfaceNeural/actions/workflows/ci.yml).
+
+Abra uma execução concluída com sucesso e, em **Artifacts**, baixe
+**MonitorMuscular-Instalador-Windows-x86_64**. Extraia o ZIP para encontrar
+`MonitorMuscular-Instalar.exe`. O download exige login e acesso ao repositório privado.
+
 Para quem só vai usar o monitor, Igor entrega o arquivo **MonitorMuscular-Instalar.exe**:
 
 1. Abra `MonitorMuscular-Instalar.exe` com dois cliques.
@@ -18,9 +24,8 @@ O instalador inclui Python, dependências e licenças; não exige terminal ou co
 GitHub no computador de quem vai usar. Instala só para o usuário atual, sem pedir
 administrador. Alvos: Windows 10 1809+ e Windows 11, ambos x64.
 
-**Para Igor obter o arquivo:** depois que a CI do GitHub terminar com sucesso, abra
-**Actions → Verificação V1**, baixe o artefato **MonitorMuscular-Instalador-Windows-x86_64**,
-extraia o ZIP e entregue somente `MonitorMuscular-Instalar.exe` ao amigo. O repositório
+**Para Igor entregar o arquivo:** depois de baixar e extrair o ZIP pelo link acima,
+entregue somente `MonitorMuscular-Instalar.exe` ao amigo. O repositório
 pode continuar privado; o amigo não precisa acessá-lo se receber esse arquivo.
 
 A CI compila, instala, confere arquivos/atalho, roda a simulação e desinstala antes
