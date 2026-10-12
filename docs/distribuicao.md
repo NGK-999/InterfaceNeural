@@ -24,6 +24,21 @@ todo o payload com o pacote original, confere destino/diretório do atalho, roda
 `--smoke-test` e desinstala. A CI só disponibiliza o artefato
 `MonitorMuscular-Instalador-Windows-x86_64` depois que essas etapas passam.
 
+Após os dois sistemas passarem na CI de `main`, o job **Atualizar download no
+README** coloca o endereço direto do ZIP entre os marcadores
+`windows-installer-download:start` e `windows-installer-download:end`. O restante
+do README é preservado. O link usa o ID real do artefato dessa execução, exige
+login/acesso ao repositório privado e expira com o artefato. Enquanto não houver
+compilação aprovada, o README informa que o download está aguardando. Não há
+publicação de release nem mudança de visibilidade do repositório.
+O bloco também registra o número da execução, para uma compilação antiga que
+terminar mais tarde não substituir o link de uma compilação nova.
+
+Somente esse job recebe escrita de conteúdo; ele roda após push ou execução
+manual de `main`, sem rodar em pull requests. O commit do link usa `[skip ci]` e
+o token da própria CI. Depois dessa atualização automática, a cópia local de
+publicação deve ser sincronizada com `main` antes de novas alterações.
+
 O script de instalação/desinstalação é restrito à CI do GitHub (PowerShell 7,
 `GITHUB_ACTIONS` e `RUNNER_TEMP`); não deve ser executado no PC de quem usa o
 monitor. Ele também aborta caso encontre registro, atalhos ou pasta anteriores.

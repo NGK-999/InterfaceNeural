@@ -139,3 +139,18 @@ independente. Compilação, instalação e desinstalação **não foram executad
 Linux**, pois não há Windows/ISCC/PowerShell disponíveis. Nenhuma ferramenta
 Windows ou camada de emulação foi instalada no computador de desenvolvimento.
 As etapas da CI são verificações preparadas, não resultados já obtidos.
+
+## Link direto de download
+
+O README passou a reservar um bloco para o endereço direto do ZIP do instalador.
+O job de atualização depende das verificações dos dois sistemas e só usa um
+artefato real, não expirado, da mesma execução. Ele preserva o texto fora dos
+marcadores e usa o SHA do README para recusar uma edição concorrente.
+
+Verificação local: 24 testes Node com API em memória, validação do YAML e teste
+de integração da chamada da CI com o helper e o README. Os 62 testes Python
+também passaram. Não houve chamada de escrita ao GitHub durante esses testes.
+Atualização do README no GitHub e download real pelo navegador continuam
+pendentes da execução remota aprovada; as falhas na CI ainda exigem os logs.
+O número da execução é guardado dentro do bloco: uma execução antiga que terminar
+depois de uma nova preserva o link mais recente.
