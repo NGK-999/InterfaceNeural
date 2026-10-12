@@ -1,0 +1,40 @@
+{
+  "platform": "Linux-6.17.0-1033-oem-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "qt_platform": "offscreen",
+  "versions": {
+    "PySide6-Essentials": "6.12.0",
+    "pyqtgraph": "0.14.0",
+    "numpy": "2.5.4",
+    "pyserial": "3.5"
+  },
+  "elapsed_seconds": 60.05969862999336,
+  "requested_samples_per_second": 2000,
+  "generated": 120040,
+  "received": 120040,
+  "consumed": 120040,
+  "queue_dropped": 0,
+  "missing_samples": 0,
+  "errors": 0,
+  "buffer_max_samples": 20001,
+  "buffer_capacity_dropped": 0,
+  "max_drained_batches": 2,
+  "ui_ticks": 1876,
+  "ui_max_interval_ms": 57.11459298618138,
+  "ui_p99_interval_ms": 32.93705550458981,
+  "rss_min_after_warmup_mib": 127.3203125,
+  "rss_max_after_warmup_mib": 127.60546875,
+  "checks": {
+    "duration_at_least_requested": true,
+    "sample_accounting": true,
+    "bounded_buffer": true,
+    "ten_second_window": true,
+    "no_losses": true,
+    "no_errors": true,
+    "pause_acquires_without_replay": true,
+    "ui_max_interval_under_one_second": true,
+    "rss_growth_under_32_mib_after_warmup": true,
+    "worker_stopped": true
+  },
+  "passed": true
+}

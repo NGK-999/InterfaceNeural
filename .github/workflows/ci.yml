@@ -1,0 +1,47 @@
+name: Verificação V1
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  software:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: '*requirements*.lock'
+      - run: python -m pip install -r requirements-dev.lock
+      - run: python -m pip install --no-build-isolation --no-deps -e .
+      - run: python -m ruff check .
+      - run: python -m ruff format --check .
+      - run: python -m mypy src
+      - run: python -m pytest
+      - run: python -m muscle_monitor --smoke-test
+      - run: python scripts/soak.py --headless --seconds 60 --rate 2000
+      - run: python scripts/build.py
+      - name: Smoke do pacote Linux
+        if: runner.os == 'Linux'
+        run: ./dist/MuscleMonitor/MuscleMonitor --smoke-test
+      - name: Smoke do pacote Windows
+        if: runner.os == 'Windows'
+        run: |
+          $process = Start-Process .\dist\MuscleMonitor\MuscleMonitor.exe -ArgumentList '--smoke-test' -PassThru -Wait
+          if ($process.ExitCode -ne 0) { exit $process.ExitCode }
+      - name: Disponibilizar aplicativo completo
+        uses: actions/upload-artifact@v4
+        with:
+          name: MuscleMonitor-${{ matrix.os }}-x86_64
+          path: dist/MuscleMonitor/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidencias-${{ matrix.os }}
+          path: artifacts/
+

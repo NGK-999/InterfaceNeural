@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools==84.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "muscle-monitor"
+version = "0.1.0"
+description = "Monitor desktop local de um canal, com simulação e serial NDJSON"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "PySide6-Essentials==6.12.0",
+  "pyqtgraph==0.14.0",
+  "numpy==2.5.4",
+  "pyserial==3.5",
+]
+
+[project.scripts]
+muscle-monitor = "muscle_monitor.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["pyqtgraph", "pyqtgraph.*"]
+ignore_missing_imports = true
+
