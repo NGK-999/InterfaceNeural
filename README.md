@@ -4,6 +4,14 @@ Aplicativo desktop local de um canal, em português: simulador ajustável, recep
 serial NDJSON, gráfico de amplitude versus tempo, pausa visual, zoom e estatísticas.
 Inicia desconectado com **Simulador** selecionado. Não guarda sessões ou amostras.
 
+## Baixar o projeto
+
+**[Baixar projeto completo — ZIP](https://github.com/NGK-999/InterfaceNeural/archive/refs/heads/main.zip)**
+
+Esse ZIP contém o código-fonte e a documentação. O download exige login no
+GitHub com acesso ao repositório privado. Para instalar no Windows, use o
+instalador descrito na seção abaixo.
+
 ## Instalar no Windows: caminho simples
 
 <!-- windows-installer-download:start -->
