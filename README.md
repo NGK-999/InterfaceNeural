@@ -7,7 +7,13 @@ Inicia desconectado com **Simulador** selecionado. Não guarda sessões ou amost
 ## Instalar no Windows: caminho simples
 
 <!-- windows-installer-download:start -->
-**Download do instalador Windows:** aguardando uma compilação aprovada.
+
+<!-- windows-installer-run:4 -->
+
+[**Baixar instalador Windows (.zip)**](https://github.com/NGK-999/InterfaceNeural/actions/runs/38271764003/artifacts/11757880905)
+
+Extraia o ZIP e abra `MonitorMuscular-Instalar.exe`.
+
 <!-- windows-installer-download:end -->
 
 Após a CI aprovar o instalador, o link acima será preenchido automaticamente e
