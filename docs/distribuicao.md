@@ -33,9 +33,10 @@ Após os dois sistemas passarem na CI de `main`, o job **Atualizar download no
 README** coloca o endereço direto do ZIP entre os marcadores
 `windows-installer-download:start` e `windows-installer-download:end`. O restante
 do README é preservado. O link usa o ID real do artefato dessa execução, exige
-login/acesso ao repositório privado e expira com o artefato. Enquanto não houver
+login no GitHub, mesmo com o repositório público, e expira com o artefato.
+Enquanto não houver
 compilação aprovada, o README informa que o download está aguardando. Não há
-publicação de release nem mudança de visibilidade do repositório.
+publicação de release, e esse job não muda a visibilidade do repositório.
 O bloco também registra o número da execução, para uma compilação antiga que
 terminar mais tarde não substituir o link de uma compilação nova.
 

@@ -8,9 +8,9 @@ Inicia desconectado com **Simulador** selecionado. Não guarda sessões ou amost
 
 **[Baixar projeto completo — ZIP](https://github.com/NGK-999/InterfaceNeural/archive/refs/heads/main.zip)**
 
-Esse ZIP contém o código-fonte e a documentação. O download exige login no
-GitHub com acesso ao repositório privado. Para instalar no Windows, use o
-instalador descrito na seção abaixo.
+Esse ZIP contém o código-fonte e a documentação. O repositório é público e esse
+download não exige login no GitHub. Para instalar no Windows, use o instalador
+descrito na seção abaixo.
 
 ## Instalar no Windows: caminho simples
 
@@ -26,8 +26,9 @@ Extraia o ZIP e abra `MonitorMuscular-Instalar.exe`.
 
 O link acima inicia o download do ZIP **MonitorMuscular-Instalador-Windows-x86_64**,
 aprovado pela CI. Extraia
-o ZIP para encontrar `MonitorMuscular-Instalar.exe`. O download exige login e
-acesso ao repositório privado. O link vale enquanto o artefato estiver disponível;
+o ZIP para encontrar `MonitorMuscular-Instalar.exe`. O download do artefato exige
+login no GitHub, mesmo com o repositório público. O link vale enquanto o artefato
+estiver disponível;
 uma nova compilação aprovada atualiza o endereço.
 
 Para quem só vai usar o monitor, Igor entrega o arquivo **MonitorMuscular-Instalar.exe**:
@@ -43,8 +44,8 @@ GitHub no computador de quem vai usar. Instala só para o usuário atual, sem pe
 administrador. Alvos: Windows 10 1809+ e Windows 11, ambos x64.
 
 **Para Igor entregar o arquivo:** depois de baixar e extrair o ZIP pelo link acima,
-entregue somente `MonitorMuscular-Instalar.exe` ao amigo. O repositório
-pode continuar privado; o amigo não precisa acessá-lo se receber esse arquivo.
+entregue somente `MonitorMuscular-Instalar.exe` ao amigo. Ele pode instalar o
+arquivo recebido sem conta do GitHub.
 
 A CI compilou, instalou, conferiu arquivos/atalhos, executou a simulação e
 desinstalou o aplicativo com sucesso no Windows Server 2025. A inspeção visual
