@@ -103,8 +103,8 @@ automaticamente para quilosegundos. Essa regressão também falhou antes da corr
 | Ubuntu 24.04.5 x64 / testes, tipos, lint | Executado e aprovado |
 | Ubuntu / GUI offscreen e ensaio 60 s | Executado e aprovado |
 | Ubuntu / GUI nativa e pacote | Abertura, controles descritos, simulação e fechamento executados |
-| Windows 10/11 x64 | **Não executado**; instalação e receita de build preparadas |
-| GitHub Actions Ubuntu/Windows | Matriz criada; **nenhuma execução remota nesta entrega** |
+| Windows 10/11 x64 / GUI nativa e instalação no PC | **Não executado**; instalador ainda aguarda aprovação |
+| GitHub Actions Ubuntu/Windows | Logs remotos lidos em 12/10/2026; duas falhas identificadas, descritas abaixo |
 | Outro Linux, instalação Linux limpa ou outro computador | Não executado |
 
 ## Pendências de hardware
@@ -151,6 +151,33 @@ Verificação local: 24 testes Node com API em memória, validação do YAML e t
 de integração da chamada da CI com o helper e o README. Os 62 testes Python
 também passaram. Não houve chamada de escrita ao GitHub durante esses testes.
 Atualização do README no GitHub e download real pelo navegador continuam
-pendentes da execução remota aprovada; as falhas na CI ainda exigem os logs.
+pendentes da execução remota aprovada; as falhas observadas estão descritas abaixo.
 O número da execução é guardado dentro do bloco: uma execução antiga que terminar
 depois de uma nova preserva o link mais recente.
+
+## Falhas remotas observadas e correções
+
+Em 12/10/2026, a saída de `gh run view --log-failed` executado pelo operador foi
+lida no terminal do Orca. Não se copiou o histórico de autenticação para arquivos.
+
+- **Ubuntu 24.04, Python 3.12.15:** coleta de `tests/test_ui.py` interrompida ao
+  importar QtTest por ausência de `libEGL.so.1`. A dependência foi confirmada com
+  `ldd`/ELF de QtGui; `dpkg-query` atribui a biblioteca a `libegl1`. A CI passa a
+  instalar somente esse pacote e suas dependências obrigatórias, sem modificar
+  o computador do operador.
+- **Runner Windows, Python 3.12.10:** a etapa de instalador parou em
+  `scripts/windows-installer.ps1:49`, na checagem textual de `FileVersion` do
+  `ISCC.exe`. O recurso oficial dessa ferramenta tem versão `0.0.0.0`, enquanto
+  `SetupBinVersion` da distribuição é `0x06070300`. A checagem foi transferida para
+  `PREPROCVER`/`EncodeVer` no início da receita, mantendo SHA256 e assinatura.
+
+Pela ordem dos passos obrigatórios da CI, as verificações do aplicativo, ensaio,
+build e smoke do pacote Windows antecederam a falha do instalador. Isso confirma
+avanço remoto além do build do aplicativo, mas não aprovação do instalador nem
+inspeção gráfica nativa. O sistema exato do runner não aparece no trecho recebido.
+
+Verificação local após as correções: importação de QtTest/QtWidgets, 62 testes
+Python, 24 testes Node, Ruff, formatação, mypy e YAML. A versão codificada foi
+confrontada com o recurso/código e a documentação oficial do Inno Setup. Não há
+ISCC/PowerShell no Linux: a nova compilação e instalação continuam pendentes de
+execução na CI Windows. Nenhuma porta física foi aberta.

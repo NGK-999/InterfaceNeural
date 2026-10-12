@@ -1,4 +1,7 @@
 ; Compile depois de scripts/build.py, com Inno Setup 6.7.3.
+#if PREPROCVER != EncodeVer(6, 7, 3, 0)
+  #error Use exatamente Inno Setup 6.7.3 para gerar este instalador.
+#endif
 #ifndef AppVersion
   #define AppVersion "0.1.0"
 #endif

@@ -45,9 +45,8 @@ try {
     if (-not (Test-Path $compiler)) {
         throw 'O compilador Inno Setup nao foi encontrado apos a preparacao.'
     }
-    if ((Get-Item $compiler).VersionInfo.FileVersion -notmatch '^6\.7\.3(\.|$)') {
-        throw 'Versao do compilador diferente da fixada em 6.7.3.'
-    }
+    # ISCC.exe tem FileVersion 0.0.0.0 no recurso oficial. A receita verifica
+    # PREPROCVER (SetupBinVersion) antes de compilar, sem interpretar esse texto.
     $license = Join-Path $toolRoot 'license.txt'
     if (-not (Test-Path $license)) { throw 'Licenca do Inno Setup ausente.' }
     Copy-Item $license (Join-Path $bundle '_internal\licenses\INNO-SETUP.txt')

@@ -21,6 +21,11 @@ jobs:
           python-version: '3.12'
           cache: pip
           cache-dependency-path: '*requirements*.lock'
+      - name: Instalar biblioteca EGL do Qt no Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y libegl1
       - run: python -m pip install -r requirements-dev.lock
       - run: python -m pip install --no-build-isolation --no-deps -e .
       - run: python -m ruff check .

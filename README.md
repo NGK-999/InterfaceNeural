@@ -38,7 +38,8 @@ nenhum instalador Windows foi gerado neste ambiente Linux. O instalador produzid
 não tem assinatura digital própria; o primeiro teste deve ser acompanhado se o
 Windows exibir um aviso de segurança. Não é necessário desativar proteções do sistema.
 
-O pacote portátil completo continua disponível como `MuscleMonitor-windows-latest-x86_64`.
+Quando a CI concluir, o pacote portátil completo também será disponibilizado como
+`MuscleMonitor-windows-latest-x86_64`.
 Ele exige extrair a pasta inteira e conservar `_internal` junto de `MuscleMonitor.exe`.
 
 No pacote Linux, abra `MuscleMonitor`, mantendo `_internal` ao lado.
@@ -85,8 +86,9 @@ py -3.12 -m venv .venv
 .\scripts\start.cmd
 ```
 
-Windows ainda **não foi executado neste ambiente**. Há matriz de CI e receita de
-build; isso não equivale a teste realizado. Veja [evidências](docs/verificacao.md).
+O ambiente local de desenvolvimento é Linux. A CI Windows avançou até a etapa
+do instalador, mas a distribuição ainda aguarda aprovação. A instalação e a
+interface nativa Windows continuam pendentes. Veja [evidências](docs/verificacao.md).
 
 ## Usar
 

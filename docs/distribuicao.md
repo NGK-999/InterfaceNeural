@@ -19,6 +19,11 @@ assinatura Authenticode conferida (Pyrsys B.V.). Instala o compilador em modo
 portátil no runner, sem associação `.iss`, atalhos ou instalação global. O
 compilador não é uma dependência do aplicativo e não vai para o PC do amigo.
 
+A receita exige `PREPROCVER == EncodeVer(6, 7, 3, 0)` antes de compilar. Essa
+variável identifica a versão da distribuição Inno Setup. O recurso `FileVersion`
+do executável auxiliar `ISCC.exe` é `0.0.0.0` no código oficial e não serve para
+essa conferência. O hash e a assinatura do download continuam obrigatórios.
+
 O script compila `packaging/windows.iss`, instala em uma pasta de teste, compara
 todo o payload com o pacote original, confere destino/diretório do atalho, roda
 `--smoke-test` e desinstala. A CI só disponibiliza o artefato
@@ -52,13 +57,16 @@ encerramento, mas o primeiro teste gráfico nativo Windows ainda cabe ao operado
 O executável próprio ainda não é assinado digitalmente. A assinatura verificada
 do compilador não assina o instalador produzido. Não há desativação de proteções,
 instalação de drivers, abertura de portas físicas ou alteração de firmware.
-Compilação e execução Windows ainda precisam ser confirmadas pela CI; esta
-receita não foi executada no Linux.
+O build do aplicativo e seu smoke antecederam a falha do instalador na primeira
+CI Windows observada. Compilação do instalador, instalação e desinstalação ainda
+precisam ser confirmadas pela CI; esta receita não foi executada no Linux.
 
 Referências: [Inno Setup](https://jrsoftware.org/isdl.php),
 [hash do instalador 6.7.3](https://raw.githubusercontent.com/microsoft/winget-pkgs/master/manifests/j/JRSoftware/InnoSetup/6.7.3/JRSoftware.InnoSetup.installer.yaml),
 [modo portátil oficial](https://raw.githubusercontent.com/jrsoftware/issrc/is-6_7_3/isportable.iss),
-[privilégios](https://jrsoftware.org/ishelp/topic_setup_privilegesrequired.htm).
+[privilégios](https://jrsoftware.org/ishelp/topic_setup_privilegesrequired.htm),
+[PREPROCVER](https://jrsoftware.org/ishelp/topic_predefinedvars.htm),
+[EncodeVer](https://jrsoftware.org/ishelp/topic_encodever.htm).
 
 ## Pacote portátil e código-fonte
 
@@ -74,7 +82,7 @@ Linux:
 ./dist/MuscleMonitor/MuscleMonitor
 ```
 
-Windows PowerShell, receita ainda não executada:
+Windows PowerShell:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.lock
@@ -96,7 +104,8 @@ construídos a partir do nome da porta.
 ## Requisitos externos
 
 No Linux, uma sessão gráfica e as bibliotecas do sistema usadas pelo backend Qt
-continuam necessárias. Em X11/XWayland, isso inclui X11/XCB, `libxcb-cursor0`,
+continuam necessárias. QtGui também depende de `libEGL.so.1`, inclusive com
+`offscreen`; na CI Ubuntu, ela é fornecida por `libegl1`. Em X11/XWayland, isso inclui X11/XCB, `libxcb-cursor0`,
 `libxkbcommon-x11-0`, Fontconfig e FreeType. Confira a falta específica relatada
 pelo loader/plugin; não instale indiscriminadamente pacotes de compilação.
 O pacote gerado em Ubuntu 24.04 não promete rodar em distribuições mais antigas.
