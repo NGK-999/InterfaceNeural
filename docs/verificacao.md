@@ -117,3 +117,25 @@ Nenhuma equivalência entre contagem ADC, tensão ou grandeza fisiológica foi e
 Integração serial física **não testada**. Segurança do circuito para contato corporal
 **não avaliada** e dependente de revisão qualificada. Nenhum resultado de software
 deste documento autoriza teste no corpo.
+
+## Entrega simplificada para Windows
+
+Foi acrescentada a receita `packaging/windows.iss` e o script
+`scripts/windows-installer.ps1` para produzir `MonitorMuscular-Instalar.exe`:
+instalação por usuário em português, com atalho na área de trabalho.
+Nenhuma função de aquisição do aplicativo foi alterada nessa etapa.
+
+A CI Windows foi configurada para compilar o instalador com Inno Setup 6.7.3,
+instalar em uma pasta com espaços e acentos, conferir todos os arquivos e o
+atalho, executar o smoke do aplicativo instalado e desinstalar. O upload desse
+artefato depende do sucesso dessas etapas. A assinatura e o hash conferidos
+são do compilador oficial, não do instalador próprio, que ainda não é assinado.
+O teste é restrito ao runner da CI e aborta perante instalações anteriores;
+o smoke usa Qt offscreen, sem validar o backend gráfico nativo Windows.
+
+Verificações locais: Ruff, formatação, mypy e 62 testes do aplicativo passaram.
+A receita e as flags foram confrontadas com documentação oficial e revisão
+independente. Compilação, instalação e desinstalação **não foram executadas neste
+Linux**, pois não há Windows/ISCC/PowerShell disponíveis. Nenhuma ferramenta
+Windows ou camada de emulação foi instalada no computador de desenvolvimento.
+As etapas da CI são verificações preparadas, não resultados já obtidos.

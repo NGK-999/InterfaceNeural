@@ -4,19 +4,33 @@ Aplicativo desktop local de um canal, em português: simulador ajustável, recep
 serial NDJSON, gráfico de amplitude versus tempo, pausa visual, zoom e estatísticas.
 Inicia desconectado com **Simulador** selecionado. Não guarda sessões ou amostras.
 
-## Testar no Windows pelo pacote
+## Instalar no Windows: caminho simples
 
-Depois que a execução da CI no GitHub terminar com sucesso:
+Para quem só vai usar o monitor, Igor entrega o arquivo **MonitorMuscular-Instalar.exe**:
 
-1. Abra **Actions** no repositório e selecione a execução de **Verificação V1**.
-2. Em **Artifacts**, baixe `MuscleMonitor-windows-latest-x86_64`.
-3. Extraia o ZIP inteiro para uma pasta; mantenha `_internal` junto do executável.
-4. Abra `MuscleMonitor.exe` e clique em **Iniciar** com **Simulador** selecionado.
+1. Abra `MonitorMuscular-Instalar.exe` com dois cliques.
+2. Clique em **Instalar**.
+3. Clique em **Concluir** para abrir o monitor.
+4. Clique em **Iniciar**, mantendo **Simulador** selecionado.
 
-Esse pacote inclui Python e dependências; não precisa instalar Python separadamente.
-O download dos artefatos exige login no GitHub e acesso ao repositório. Se a CI
-ainda não concluiu, use a instalação pelo código-fonte abaixo. A configuração de
-CI não comprova que um build Windows já foi executado.
+Nas próximas vezes, abra o atalho **Monitor de Sinais Musculares** na área de trabalho.
+O instalador inclui Python, dependências e licenças; não exige terminal ou conta do
+GitHub no computador de quem vai usar. Instala só para o usuário atual, sem pedir
+administrador. Alvos: Windows 10 1809+ e Windows 11, ambos x64.
+
+**Para Igor obter o arquivo:** depois que a CI do GitHub terminar com sucesso, abra
+**Actions → Verificação V1**, baixe o artefato **MonitorMuscular-Instalador-Windows-x86_64**,
+extraia o ZIP e entregue somente `MonitorMuscular-Instalar.exe` ao amigo. O repositório
+pode continuar privado; o amigo não precisa acessá-lo se receber esse arquivo.
+
+A CI compila, instala, confere arquivos/atalho, roda a simulação e desinstala antes
+de disponibilizar o instalador. Essa receita ainda depende de execução Windows;
+nenhum instalador Windows foi gerado neste ambiente Linux. O instalador produzido
+não tem assinatura digital própria; o primeiro teste deve ser acompanhado se o
+Windows exibir um aviso de segurança. Não é necessário desativar proteções do sistema.
+
+O pacote portátil completo continua disponível como `MuscleMonitor-windows-latest-x86_64`.
+Ele exige extrair a pasta inteira e conservar `_internal` junto de `MuscleMonitor.exe`.
 
 No pacote Linux, abra `MuscleMonitor`, mantendo `_internal` ao lado.
 As instruções abaixo são para o código-fonte, que pode ser baixado em **Code →

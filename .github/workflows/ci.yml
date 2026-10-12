@@ -2,6 +2,7 @@ name: Verificação V1
 on: [push, pull_request, workflow_dispatch]
 jobs:
   software:
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -33,6 +34,16 @@ jobs:
         run: |
           $process = Start-Process .\dist\MuscleMonitor\MuscleMonitor.exe -ArgumentList '--smoke-test' -PassThru -Wait
           if ($process.ExitCode -ne 0) { exit $process.ExitCode }
+      - name: Gerar e verificar instalador Windows
+        if: runner.os == 'Windows'
+        run: ./scripts/windows-installer.ps1
+      - name: Disponibilizar instalador Windows
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: MonitorMuscular-Instalador-Windows-x86_64
+          path: dist/installer/MonitorMuscular-Instalar.exe
+          if-no-files-found: error
       - name: Disponibilizar aplicativo completo
         uses: actions/upload-artifact@v4
         with:

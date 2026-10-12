@@ -1,5 +1,52 @@
 # Build local e distribuição
 
+## Instalador Windows para quem só vai usar
+
+O arquivo a entregar é `MonitorMuscular-Instalar.exe`. Ele instala o pacote
+completo, cria atalhos na área de trabalho e no menu Iniciar e oferece abrir o
+aplicativo ao concluir. A interface do instalador é em português brasileiro.
+Não exige Python, GitHub ou terminal no computador do usuário final.
+
+Instalação por usuário em `%LOCALAPPDATA%\Programs\MuscleMonitor`, sem elevação.
+Somente Windows 10 1809+ e Windows 11 x64. O `AppId` permanece estável nas
+atualizações; fechamento de aplicações é cooperativo, sem opção `force` e sem
+reabrir automaticamente uma aquisição anterior. A desinstalação não apaga os
+logs em `%LOCALAPPDATA%\MuscleMonitor\logs`.
+
+Na CI, `scripts/windows-installer.ps1` usa Inno Setup **6.7.3** em uma pasta
+temporária isolada. O download vem do fornecedor oficial, com SHA256 fixado e
+assinatura Authenticode conferida (Pyrsys B.V.). Instala o compilador em modo
+portátil no runner, sem associação `.iss`, atalhos ou instalação global. O
+compilador não é uma dependência do aplicativo e não vai para o PC do amigo.
+
+O script compila `packaging/windows.iss`, instala em uma pasta de teste, compara
+todo o payload com o pacote original, confere destino/diretório do atalho, roda
+`--smoke-test` e desinstala. A CI só disponibiliza o artefato
+`MonitorMuscular-Instalador-Windows-x86_64` depois que essas etapas passam.
+
+O script de instalação/desinstalação é restrito à CI do GitHub (PowerShell 7,
+`GITHUB_ACTIONS` e `RUNNER_TEMP`); não deve ser executado no PC de quem usa o
+monitor. Ele também aborta caso encontre registro, atalhos ou pasta anteriores.
+Para compilar manualmente, um desenvolvedor com o pacote Windows e o compilador
+Inno Setup 6.7.3 pode chamar `ISCC.exe /DAppVersion=0.1.0 packaging\windows.iss`;
+essa chamada só gera o instalador e não instala/desinstala o aplicativo.
+
+O smoke da CI usa Qt `offscreen`: confirma payload, inicialização, simulador e
+encerramento, mas o primeiro teste gráfico nativo Windows ainda cabe ao operador.
+
+O executável próprio ainda não é assinado digitalmente. A assinatura verificada
+do compilador não assina o instalador produzido. Não há desativação de proteções,
+instalação de drivers, abertura de portas físicas ou alteração de firmware.
+Compilação e execução Windows ainda precisam ser confirmadas pela CI; esta
+receita não foi executada no Linux.
+
+Referências: [Inno Setup](https://jrsoftware.org/isdl.php),
+[hash do instalador 6.7.3](https://raw.githubusercontent.com/microsoft/winget-pkgs/master/manifests/j/JRSoftware/InnoSetup/6.7.3/JRSoftware.InnoSetup.installer.yaml),
+[modo portátil oficial](https://raw.githubusercontent.com/jrsoftware/issrc/is-6_7_3/isportable.iss),
+[privilégios](https://jrsoftware.org/ishelp/topic_setup_privilegesrequired.htm).
+
+## Pacote portátil e código-fonte
+
 Execute o build no **próprio sistema-alvo**, com Python 3.12 x64 e o ambiente de
 desenvolvimento instalado. Não há compilação Windows feita no Linux.
 
